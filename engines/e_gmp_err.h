@@ -67,7 +67,7 @@ extern "C" {
 static void ERR_load_GMP_strings(void);
 static void ERR_unload_GMP_strings(void);
 static void ERR_GMP_error(int function, int reason, char *file, int line);
-# define GMPerr(f,r) ERR_GMP_error((f),(r),__FILE__,__LINE__)
+# define GMPerr(f,r) ERR_GMP_error((f),(r),OPENSSL_FILE,OPENSSL_LINE)
 
 /* Error codes for the GMP functions. */
 

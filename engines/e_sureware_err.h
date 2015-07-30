@@ -68,7 +68,7 @@ static void ERR_load_SUREWARE_strings(void);
 static void ERR_unload_SUREWARE_strings(void);
 static void ERR_SUREWARE_error(int function, int reason, char *file,
                                int line);
-# define SUREWAREerr(f,r) ERR_SUREWARE_error((f),(r),__FILE__,__LINE__)
+# define SUREWAREerr(f,r) ERR_SUREWARE_error((f),(r),OPENSSL_FILE,OPENSSL_LINE)
 
 /* Error codes for the SUREWARE functions. */
 

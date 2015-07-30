@@ -67,7 +67,7 @@ extern "C" {
 static void ERR_load_NURON_strings(void);
 static void ERR_unload_NURON_strings(void);
 static void ERR_NURON_error(int function, int reason, char *file, int line);
-# define NURONerr(f,r) ERR_NURON_error((f),(r),__FILE__,__LINE__)
+# define NURONerr(f,r) ERR_NURON_error((f),(r),OPENSSL_FILE,OPENSSL_LINE)
 
 /* Error codes for the NURON functions. */
 

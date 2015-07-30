@@ -1053,7 +1053,7 @@ int dtls1_send_change_cipher_spec(SSL *s, int a, int b)
 int dtls1_read_failed(SSL *s, int code)
 {
     if (code > 0) {
-        fprintf(stderr, "invalid state reached %s:%d", __FILE__, __LINE__);
+        fprintf(stderr, "dtls1_read_failed(); invalid state reached\n");
         return 1;
     }
 
