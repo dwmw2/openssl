@@ -67,7 +67,7 @@ extern "C" {
 static void ERR_load_AEPHK_strings(void);
 static void ERR_unload_AEPHK_strings(void);
 static void ERR_AEPHK_error(int function, int reason, char *file, int line);
-# define AEPHKerr(f,r) ERR_AEPHK_error((f),(r),__FILE__,__LINE__)
+# define AEPHKerr(f,r) ERR_AEPHK_error((f),(r),OPENSSL_FILE,OPENSSL_LINE)
 
 /* Error codes for the AEPHK functions. */
 

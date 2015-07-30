@@ -67,7 +67,7 @@ extern "C" {
 static void ERR_load_CSWIFT_strings(void);
 static void ERR_unload_CSWIFT_strings(void);
 static void ERR_CSWIFT_error(int function, int reason, char *file, int line);
-# define CSWIFTerr(f,r) ERR_CSWIFT_error((f),(r),__FILE__,__LINE__)
+# define CSWIFTerr(f,r) ERR_CSWIFT_error((f),(r),OPENSSL_FILE,OPENSSL_LINE)
 
 /* Error codes for the CSWIFT functions. */
 

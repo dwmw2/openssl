@@ -67,7 +67,7 @@ extern "C" {
 static void ERR_load_ATALLA_strings(void);
 static void ERR_unload_ATALLA_strings(void);
 static void ERR_ATALLA_error(int function, int reason, char *file, int line);
-# define ATALLAerr(f,r) ERR_ATALLA_error((f),(r),__FILE__,__LINE__)
+# define ATALLAerr(f,r) ERR_ATALLA_error((f),(r),OPENSSL_FILE,OPENSSL_LINE)
 
 /* Error codes for the ATALLA functions. */
 
