@@ -2374,6 +2374,8 @@ int args_verify(char ***pargs, int *pargc,
         flags |= X509_V_FLAG_PARTIAL_CHAIN;
     else if (!strcmp(arg, "-no_alt_chains"))
         flags |= X509_V_FLAG_NO_ALT_CHAINS;
+    else if (!strcmp(arg, "-no_check_time"))
+        flags |= X509_V_FLAG_NO_CHECK_TIME;
     else
         return 0;
 
