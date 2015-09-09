@@ -293,6 +293,7 @@ $ CONFIG_LOGICALS := AES,-
 		     RFC3779,-
 		     RIPEMD,-
 		     RSA,-
+		     SCT,-
 		     SCTP,-
 		     SEED,-
 		     SHA,-
