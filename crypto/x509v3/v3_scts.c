@@ -61,6 +61,7 @@
 #include <openssl/asn1.h>
 #include <openssl/x509v3.h>
 
+#ifndef OPENSSL_NO_SCT
 /* Signature and hash algorithms from RFC 5246 */
 #define TLSEXT_hash_sha256                              4
 
@@ -332,3 +333,4 @@ static int i2r_SCT_LIST(X509V3_EXT_METHOD *method, STACK_OF(SCT) *sct_list,
 
     return 1;
 }
+#endif
