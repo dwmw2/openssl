@@ -1082,7 +1082,7 @@ if (defined($disabled{"tls1"}))
 	}
 
 if (defined($disabled{"ec"}) || defined($disabled{"dsa"})
-    || defined($disabled{"dh"}))
+    || defined($disabled{"dh"}) || defined($disabled{"stdio"}))
 	{
 	$disabled{"gost"} = "forced";
 	}

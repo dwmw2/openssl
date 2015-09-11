@@ -225,6 +225,7 @@ static int SRP_user_pwd_set_ids(SRP_user_pwd *vinfo, const char *id,
     return (info == NULL || NULL != (vinfo->info = BUF_strdup(info)));
 }
 
+#ifndef OPENSSL_NO_STDIO
 static int SRP_user_pwd_set_sv(SRP_user_pwd *vinfo, const char *s,
                                const char *v)
 {
@@ -239,6 +240,7 @@ static int SRP_user_pwd_set_sv(SRP_user_pwd *vinfo, const char *s,
     len = t_fromb64(tmp, s);
     return ((vinfo->s = BN_bin2bn(tmp, len, NULL)) != NULL);
 }
+#endif
 
 static int SRP_user_pwd_set_sv_BN(SRP_user_pwd *vinfo, BIGNUM *s, BIGNUM *v)
 {
@@ -279,6 +281,7 @@ int SRP_VBASE_free(SRP_VBASE *vb)
     return 0;
 }
 
+#ifndef OPENSSL_NO_STDIO
 static SRP_gN_cache *SRP_gN_new_init(const char *ch)
 {
     unsigned char tmp[MAX_LEN];
@@ -310,6 +313,7 @@ static void SRP_gN_free(SRP_gN_cache *gN_cache)
     BN_free(gN_cache->bn);
     OPENSSL_free(gN_cache);
 }
+#endif
 
 static SRP_gN *SRP_get_gN_by_id(const char *id, STACK_OF(SRP_gN) *gN_tab)
 {
@@ -326,6 +330,7 @@ static SRP_gN *SRP_get_gN_by_id(const char *id, STACK_OF(SRP_gN) *gN_tab)
     return SRP_get_default_gN(id);
 }
 
+#ifndef OPENSSL_NO_STDIO
 static BIGNUM *SRP_gN_place_bn(STACK_OF(SRP_gN_cache) *gN_cache, char *ch)
 {
     int i;
@@ -467,6 +472,7 @@ int SRP_VBASE_init(SRP_VBASE *vb, char *verifier_file)
     return error_code;
 
 }
+#endif
 
 SRP_user_pwd *SRP_VBASE_get_by_user(SRP_VBASE *vb, char *username)
 {

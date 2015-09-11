@@ -69,6 +69,8 @@
 # include <sys/stat.h>
 #endif
 
+#ifndef OPENSSL_NO_STDIO
+
 #include <openssl/lhash.h>
 #include <openssl/x509.h>
 
@@ -434,3 +436,5 @@ static int get_cert_by_subject(X509_LOOKUP *xl, int type, X509_NAME *name,
         BUF_MEM_free(b);
     return (ok);
 }
+
+#endif /* OPENSSL_NO_STDIO */

@@ -114,7 +114,9 @@ DECLARE_STACK_OF(SRP_gN)
 
 SRP_VBASE *SRP_VBASE_new(char *seed_key);
 int SRP_VBASE_free(SRP_VBASE *vb);
+#ifndef OPENSSL_NO_STDIO
 int SRP_VBASE_init(SRP_VBASE *vb, char *verifier_file);
+#endif
 SRP_user_pwd *SRP_VBASE_get_by_user(SRP_VBASE *vb, char *username);
 char *SRP_create_verifier(const char *user, const char *pass, char **salt,
                           char **verifier, const char *N, const char *g);
