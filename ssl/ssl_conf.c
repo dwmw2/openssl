@@ -370,6 +370,7 @@ static int cmd_Options(SSL_CONF_CTX *cctx, const char *value)
     return CONF_parse_list(value, ',', 1, ssl_set_option_list, cctx);
 }
 
+#ifndef OPENSSL_NO_STDIO
 static int cmd_Certificate(SSL_CONF_CTX *cctx, const char *value)
 {
     int rv = 1;
@@ -436,7 +437,9 @@ static int cmd_DHParameters(SSL_CONF_CTX *cctx, const char *value)
         BIO_free(in);
     return rv > 0;
 }
-#endif
+#endif /* !OPENSSL_NO_DH */
+#endif /* !OPENSSL_NO_STDIO */
+
 typedef struct {
     int (*cmd) (SSL_CONF_CTX *cctx, const char *value);
     const char *str_file;
@@ -462,11 +465,13 @@ static const ssl_conf_cmd_tbl ssl_conf_cmds[] = {
     SSL_CONF_CMD_STRING(CipherString, "cipher"),
     SSL_CONF_CMD_STRING(Protocol, NULL),
     SSL_CONF_CMD_STRING(Options, NULL),
+#ifndef OPENSSL_NO_STDIO
     SSL_CONF_CMD(Certificate, "cert", SSL_CONF_TYPE_FILE),
     SSL_CONF_CMD(PrivateKey, "key", SSL_CONF_TYPE_FILE),
     SSL_CONF_CMD(ServerInfoFile, NULL, SSL_CONF_TYPE_FILE),
 #ifndef OPENSSL_NO_DH
     SSL_CONF_CMD(DHParameters, "dhparam", SSL_CONF_TYPE_FILE)
+#endif
 #endif
 };
 

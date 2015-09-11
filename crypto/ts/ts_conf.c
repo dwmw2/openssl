@@ -92,6 +92,7 @@
 
 /* Function definitions for certificate and key loading. */
 
+#ifndef OPENSSL_NO_STDIO
 X509 *TS_CONF_load_cert(const char *file)
 {
     BIO *cert = NULL;
@@ -149,6 +150,7 @@ EVP_PKEY *TS_CONF_load_key(const char *file, const char *pass)
     BIO_free(key);
     return pkey;
 }
+#endif /* !OPENSSL_NO_STDIO */
 
 /* Function definitions for handling configuration options. */
 
@@ -237,6 +239,7 @@ int TS_CONF_set_default_engine(const char *name)
 
 #endif
 
+#ifndef OPENSSL_NO_STDIO
 int TS_CONF_set_signer_cert(CONF *conf, const char *section,
                             const char *cert, TS_RESP_CTX *ctx)
 {
@@ -302,6 +305,7 @@ int TS_CONF_set_signer_key(CONF *conf, const char *section,
     EVP_PKEY_free(key_obj);
     return ret;
 }
+#endif /* !OPENSSL_NO_STDIO */
 
 int TS_CONF_set_def_policy(CONF *conf, const char *section,
                            const char *policy, TS_RESP_CTX *ctx)

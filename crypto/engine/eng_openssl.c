@@ -86,7 +86,9 @@
  * this is no longer automatic in ENGINE_load_builtin_engines().
  */
 #define TEST_ENG_OPENSSL_RC4
+#ifndef OPENSSL_NO_FP_API
 #define TEST_ENG_OPENSSL_PKEY
+#endif
 /* #define TEST_ENG_OPENSSL_RC4_OTHERS */
 #define TEST_ENG_OPENSSL_RC4_P_INIT
 /* #define TEST_ENG_OPENSSL_RC4_P_CIPHER */

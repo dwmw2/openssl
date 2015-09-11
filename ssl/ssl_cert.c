@@ -855,12 +855,13 @@ int SSL_CTX_add_client_CA(SSL_CTX *ctx, X509 *x)
     return (add_client_CA(&(ctx->client_CA), x));
 }
 
+#ifndef OPENSSL_NO_STDIO
+
 static int xname_cmp(const X509_NAME *const *a, const X509_NAME *const *b)
 {
     return (X509_NAME_cmp(*a, *b));
 }
 
-#ifndef OPENSSL_NO_STDIO
 /**
  * Load CA certs from a file into a ::STACK. Note that it is somewhat misnamed;
  * it doesn't really have anything to do with clients (except that a common use
@@ -928,7 +929,6 @@ STACK_OF(X509_NAME) *SSL_load_client_CA_file(const char *file)
         ERR_clear_error();
     return (ret);
 }
-#endif
 
 /**
  * Add a file of certs to a stack.
@@ -1048,6 +1048,7 @@ int SSL_add_dir_cert_subjects_to_stack(STACK_OF(X509_NAME) *stack,
     CRYPTO_w_unlock(CRYPTO_LOCK_READDIR);
     return ret;
 }
+#endif /* !OPENSSL_NO_STDIO */
 
 /* Add a certificate to a BUF_MEM structure */
 
