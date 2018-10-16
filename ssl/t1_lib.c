@@ -3603,14 +3603,32 @@ int tls1_process_sigalgs(SSL *s)
     uint32_t *pvalid = s->s3->tmp.valid_flags;
     CERT *c = s->cert;
     TLS_SIGALGS *sigptr;
+    const tls12_hash_info *hash_info;
+    int mandatory_mdnid;
+
     if (!tls1_set_shared_sigalgs(s))
         return 0;
 
     for (i = 0, sigptr = c->shared_sigalgs;
          i < c->shared_sigalgslen; i++, sigptr++) {
         idx = tls12_get_pkey_idx(sigptr->rsign);
+        hash_info = tls12_get_hash_info(sigptr->rhash);
+        if (!hash_info)
+            continue;
+        if (s->cert->pkeys[idx].privatekey) {
+            ERR_set_mark();
+            if (EVP_PKEY_get_default_digest_nid(s->cert->pkeys[idx].privatekey,
+                                                &mandatory_mdnid) == 2 &&
+                hash_info->nid != mandatory_mdnid)
+                continue;
+            /*
+             * If EVP_PKEY_get_default_digest_nid() failed, don't pollute
+             * the error stack.
+             */
+            ERR_pop_to_mark();
+        }
         if (idx > 0 && pmd[idx] == NULL) {
-            md = tls12_get_hash(sigptr->rhash);
+            md = ssl_md(hash_info->md_idx);
             pmd[idx] = md;
             pvalid[idx] = CERT_PKEY_EXPLICIT_SIGN;
             if (idx == SSL_PKEY_RSA_SIGN) {
